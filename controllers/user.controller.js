@@ -24,7 +24,7 @@ const getUsers = async (req, res) => {
 
 }
 // POST
-const createUser = async (req, res) => {
+const saveUser = async (req, res) => {
     try {
         const { name, lastName, email, password } = req.body
         const hash = bcrypt.hashSync(password, 10)
@@ -50,7 +50,7 @@ const createUser = async (req, res) => {
 
 }
 // PUT 
-const userUpdate = async (req, res) => {
+const updateUser = async (req, res) => {
     try {
         const { id } = req.params
         const { name, lastName, email, password } = req.body
@@ -73,7 +73,7 @@ const userUpdate = async (req, res) => {
 
 }
 // DELETE
-const userDelete = async (req, res) => {
+const deleteUser = async (req, res) => {
     try {
         const { id } = req.params
         await userModel.findByIdAndDelete(id)
@@ -93,7 +93,7 @@ const userDelete = async (req, res) => {
 }
 
 // Login / 
-const login = async (req, res) =>{
+const loginUser = async (req, res) =>{
     try {
         const { email, password } = req.body
         const user = await userModel.findOne({email: email})
@@ -145,8 +145,8 @@ const login = async (req, res) =>{
 
 module.exports = {
     getUsers,
-    createUser,
-    userUpdate,
-    userDelete, 
-    login
+    saveUser,
+    updateUser,
+    deleteUser, 
+    loginUser
 }
